@@ -1,11 +1,11 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 
-import NewsListContent from './Content';
+import NewsArticle from './Article';
 
-storiesOf('NewsListContent component', module)
+storiesOf('NewsArticle component', module)
   .add('with props', () => (
-    <NewsListContent
+    <NewsArticle
       sectionName="Life and style"
       webTitle="Trigger warnings OK but no-platforming may be illegal, universities warned OK but no-platforming may be illegal, universities warned"
       webPublicationDate="02/02/2019 11:00:37"
