@@ -24,7 +24,7 @@ const UIHeader = ({
 );
 
 UIHeader.defaultProps = {
-  title: 'News',
+  title: 'NewsFeed',
   icon: null,
   alt: '',
   handleClick: () => {},

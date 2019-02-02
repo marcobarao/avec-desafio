@@ -1,8 +1,6 @@
 import React, { Component, Fragment } from 'react';
 
 import Header from '../../Header/Header';
-import Button from '../../Button/Button';
-import Spinner from '../../Spinner/Spinner';
 import NewsList from './List';
 
 import guardian from '../../../services/guardian';
@@ -20,6 +18,7 @@ class NewsListContainer extends Component {
     };
 
     this.fetchArticles = this.fetchArticles.bind(this);
+    this.setRef = this.setRef.bind(this);
     this.handleObserver = this.handleObserver.bind(this);
   }
 
@@ -29,7 +28,7 @@ class NewsListContainer extends Component {
     const options = {
       root: null,
       rootMargin: '0px',
-      threshold: 0.2,
+      threshold: 0.1,
     };
 
     this.observer = new IntersectionObserver(
@@ -42,6 +41,10 @@ class NewsListContainer extends Component {
 
   componentWillUnmount() {
     this.observer.disconnect();
+  }
+
+  setRef(moreRef) {
+    this.moreRef = moreRef;
   }
 
   handleObserver(entities) {
@@ -78,20 +81,13 @@ class NewsListContainer extends Component {
     const { isLoading, articles } = this.state;
     return (
       <Fragment>
-        <Header title="NewsFeed" />
-        <NewsList articles={articles} />
-        <Button
-          handleClick={this.fetchArticles}
-          setRef={(moreRef) => {
-            this.moreRef = moreRef;
-          }}
-        >
-          {
-            isLoading
-              ? <Spinner />
-              : 'Load more'
-          }
-        </Button>
+        <Header />
+        <NewsList
+          articles={articles}
+          isLoading={isLoading}
+          setRef={this.setRef}
+          fetchArticles={this.fetchArticles}
+        />
       </Fragment>
     );
   }

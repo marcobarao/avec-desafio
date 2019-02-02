@@ -1,34 +1,44 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
 
-import Article from '../Article/Article';
+import Button from '../../Button/Button';
+import Spinner from '../../Spinner/Spinner';
+import NewsListArticle from './Article/Article';
 
 import convertDate from '../../../utils/convertDate';
 
-import './List.css';
-
-const NewsList = ({ articles }) => (
-  <div className="main-container">
-    {
-      articles.map(article => (
-        <Link
-          key={article.id}
-          className="wrap"
-          to={article.id}
-        >
-          <Article
-            {...article}
-            {...article.fields}
-            webPublicationDate={convertDate(article.webPublicationDate)}
-          />
-        </Link>
-      ))
-    }
-  </div>
+const NewsList = ({
+  isLoading,
+  setRef,
+  fetchArticles,
+  articles,
+}) => (
+  <Fragment>
+    {articles.map(article => (
+      <NewsListArticle
+        key={article.id}
+        id={article.id}
+        sectionName={article.sectionName}
+        webTitle={article.webTitle}
+        webPublicationDate={convertDate(article.webPublicationDate)}
+        {...article.fields}
+      />
+    ))}
+    <Button
+      handleClick={fetchArticles}
+      setRef={setRef}
+    >
+      {isLoading
+        ? <Spinner />
+        : 'Load more'}
+    </Button>
+  </Fragment>
 );
 
 NewsList.propTypes = {
+  isLoading: PropTypes.bool.isRequired,
+  setRef: PropTypes.func.isRequired,
+  fetchArticles: PropTypes.func.isRequired,
   articles: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
@@ -41,7 +51,6 @@ NewsList.propTypes = {
       apiUrl: PropTypes.string,
       fields: PropTypes.shape({
         thumbnail: PropTypes.string,
-        trailText: PropTypes.string,
         productionOffice: PropTypes.string,
       }),
       isHosted: PropTypes.bool,

@@ -4,14 +4,9 @@
   margin: 20px auto;
   border: none;
   background-color: #731db1;
-  opacity: 0.8;
   font-weight: bold;
   color: #ffffff;
   cursor: pointer;
 
   transition: opacity 120ms linear;
-}
-
-.main-button:hover {
-  opacity: 1;
 }
