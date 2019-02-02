@@ -1,0 +1,52 @@
+.main-content {
+  position: relative;
+  width: 90%;
+  box-sizing: border-box;
+  height: 120px;
+  margin: 20px 5%;
+  padding: 1.25rem 1.5rem;
+  background-color: #fbfbfb;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+
+  transition: box-shadow 150ms linear;
+}
+
+.main-content:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
+}
+
+.main-content > .section {
+  position: absolute;
+  display: inline-block;
+  font-weight: bold;
+  top: -10px;
+  margin: 0;
+  padding: 3px 5px;
+  border-radius: 10px;
+  background-color: #731db1;
+  color: #ffffff;
+
+  transition: transform 100ms linear;
+}
+
+.main-content:hover > .section {
+  transform: scale(1.03);
+}
+
+.main-content > .title {
+  width: 100%;
+  margin-top: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.main-content > .publicatedAt {
+  font-size: 1.175rem;
+  color: #5F5F5F;
+}
+
+.main-content > .publicatedAt > .timezone {
+  font-size: 0.8em;
+  margin-left: 5px;
+}
