@@ -2,3 +2,8 @@ html {
   font-family: 'Ubuntu', sans-serif;
   font-size: 14px;
 }
+
+a {
+  color: #000000;
+  text-decoration: none;
+}

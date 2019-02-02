@@ -36,6 +36,7 @@
 .main-content > .title {
   width: 100%;
   margin-top: 15px;
+  color: #000000;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
