@@ -8,14 +8,24 @@ const ListContent = ({
   webTitle,
   webPublicationDate,
   timezone,
+  thumbnail,
+  productionOffice,
 }) => (
   <article className="main-content">
-    <p className="section">{ sectionName }</p>
-    <h2 className="title" title={webTitle}>{ webTitle }</h2>
-    <time className="publicatedAt">
-      { webPublicationDate }
-      <small className="timezone">{ timezone }</small>
-    </time>
+    <figure className="figure">
+      <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
+    </figure>
+    <div className="content">
+      <p className="section">{ sectionName }</p>
+      <div className="wrap">
+        <h2 className="title" title={webTitle}>{ webTitle }</h2>
+      </div>
+      <time className="publicatedAt">
+        { webPublicationDate }
+        <small className="timezone">{ timezone }</small>
+        <small className="office">{ productionOffice }</small>
+      </time>
+    </div>
   </article>
 );
 
@@ -27,6 +37,8 @@ ListContent.propTypes = {
   sectionName: PropTypes.string.isRequired,
   webTitle: PropTypes.string.isRequired,
   webPublicationDate: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string.isRequired,
+  productionOffice: PropTypes.string.isRequired,
   timezone: PropTypes.string,
 };
 

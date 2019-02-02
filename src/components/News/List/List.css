@@ -1,0 +1,21 @@
+.main-container {
+  background-color: #EBF1FA;
+}
+
+.main-container > .wrap {
+  display: inline-block;
+  width: 95%;
+  margin: 20px 0 20px 2.5%;
+}
+
+@media (min-width: 756px) {
+  .main-container > .wrap {
+    width: 46%;
+  }
+}
+
+@media (min-width: 1024px) {
+  .main-container > .wrap {
+    width: 30%;
+  }
+}

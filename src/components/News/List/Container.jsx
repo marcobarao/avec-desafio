@@ -14,15 +14,43 @@ class NewsListContainer extends Component {
       isLoading: false,
       apiKey: '0d160d0f-71cd-48b0-801f-2fc9cabd2157',
       page: 1,
-      perPage: 40,
+      perPage: 48,
       articles: [],
+      scrollY: 0,
     };
 
     this.fetchArticles = this.fetchArticles.bind(this);
+    this.handleObserver = this.handleObserver.bind(this);
   }
 
   componentDidMount() {
     this.fetchArticles();
+
+    const options = {
+      root: null,
+      rootMargin: '0px',
+      threshold: 0.2,
+    };
+
+    this.observer = new IntersectionObserver(
+      this.handleObserver,
+      options,
+    );
+
+    this.observer.observe(this.moreRef);
+  }
+
+  componentWillUnmount() {
+    this.observer.disconnect();
+  }
+
+  handleObserver(entities) {
+    const { scrollY } = this.state;
+    const { boundingClientRect: { y } } = entities[0];
+
+    if (scrollY > y) this.fetchArticles();
+
+    this.setState({ scrollY: y });
   }
 
   async fetchArticles() {
@@ -34,7 +62,7 @@ class NewsListContainer extends Component {
         page,
         perPage,
       } = this.state;
-      const content = await guardian.get(`search?api-key=${apiKey}&page-size=${perPage}&page=${page}&show-fields=thumbnail,trailText,productionOffice`);
+      const content = await guardian.get(`search?api-key=${apiKey}&page-size=${perPage}&page=${page}&show-fields=thumbnail,productionOffice`);
       const { data: { response: { results } } } = content;
       this.setState({
         articles: [...articles, ...results],
@@ -52,7 +80,12 @@ class NewsListContainer extends Component {
       <Fragment>
         <Header title="NewsFeed" />
         <NewsList articles={articles} />
-        <Button handleClick={this.fetchArticles}>
+        <Button
+          handleClick={this.fetchArticles}
+          setRef={(moreRef) => {
+            this.moreRef = moreRef;
+          }}
+        >
           {
             isLoading
               ? <Spinner />

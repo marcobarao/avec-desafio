@@ -1,9 +1,7 @@
 .main-content {
-  position: relative;
-  width: 90%;
   box-sizing: border-box;
-  height: 120px;
-  margin: 20px 5%;
+  width: 100%;
+  height: 100%;
   padding: 1.25rem 1.5rem;
   background-color: #fbfbfb;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -15,11 +13,24 @@
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.3);
 }
 
-.main-content > .section {
+.main-content > .figure {
+  margin: 0;
+}
+
+.main-content > .figure > .thumbnail {
+  width: 100%;
+  height: auto;
+}
+
+.main-content > .content {
+  position: relative;
+}
+
+.main-content > .content > .section {
   position: absolute;
   display: inline-block;
   font-weight: bold;
-  top: -10px;
+  top: -20px;
   margin: 0;
   padding: 3px 5px;
   border-radius: 10px;
@@ -29,25 +40,55 @@
   transition: transform 100ms linear;
 }
 
-.main-content:hover > .section {
+.main-content:hover > .content > .section {
   transform: scale(1.03);
 }
 
-.main-content > .title {
+.main-content > .content > .wrap {
   width: 100%;
-  margin-top: 15px;
-  color: #000000;
-  white-space: nowrap;
+  height: 100%;
+  margin: 30px 0 10px;
+  padding-top: 20px;
   overflow: hidden;
-  text-overflow: ellipsis;
 }
 
-.main-content > .publicatedAt {
+.main-content > .content > .wrap > .title {
+  position: relative;
+  width: 100%;
+  margin: 0;
+  vertical-align: center;
+  height: 3.6em;
+  overflow: hidden;
+  color: #000000;
+}
+
+.main-content > .content > .wrap > .title:after {
+  content: "";
+  text-align: right;
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 70%;
+  height: 1.2em;
+  background: linear-gradient(to right, rgba(251, 251, 251, 0), rgba(251, 251, 251, 1) 50%);
+}
+
+.main-content > .content > .publicatedAt {
+  position: relative;
+  display: block;
+  width: 100%;
   font-size: 1.175rem;
   color: #5F5F5F;
 }
 
-.main-content > .publicatedAt > .timezone {
+.main-content > .content > .publicatedAt > .timezone {
   font-size: 0.8em;
   margin-left: 5px;
+}
+
+.main-content > .content > .publicatedAt > .office {
+  position: absolute;
+  opacity: 0.8;
+  right: 0;
+  bottom: 0;
 }

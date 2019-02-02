@@ -6,14 +6,20 @@ import Article from '../Article/Article';
 
 import convertDate from '../../../utils/convertDate';
 
+import './List.css';
+
 const NewsList = ({ articles }) => (
   <div className="main-container">
     {
       articles.map(article => (
-        <Link to={article.id}>
+        <Link
+          key={article.id}
+          className="wrap"
+          to={article.id}
+        >
           <Article
-            key={article.id}
             {...article}
+            {...article.fields}
             webPublicationDate={convertDate(article.webPublicationDate)}
           />
         </Link>
