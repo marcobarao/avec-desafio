@@ -2,10 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import './Article.css';
+import './Card.css';
 import defaultThumbnail from '../../../../assets/imgs/default.png';
 
-const NewsListArticle = ({
+const NewsListCard = ({
   id,
   sectionName,
   webTitle,
@@ -37,12 +37,12 @@ const NewsListArticle = ({
   </Link>
 );
 
-NewsListArticle.defaultProps = {
+NewsListCard.defaultProps = {
   timezone: 'UTC-3',
   thumbnail: defaultThumbnail,
 };
 
-NewsListArticle.propTypes = {
+NewsListCard.propTypes = {
   id: PropTypes.string.isRequired,
   sectionName: PropTypes.string.isRequired,
   webTitle: PropTypes.string.isRequired,
@@ -52,4 +52,4 @@ NewsListArticle.propTypes = {
   timezone: PropTypes.string,
 };
 
-export default NewsListArticle;
+export default NewsListCard;

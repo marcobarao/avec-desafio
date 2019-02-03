@@ -83,12 +83,12 @@
   position: relative;
   display: block;
   width: 100%;
-  font-size: 1.175rem;
+  font-size: 0.9rem;
   color: #5F5F5F;
 }
 
 .main-content .publicatedAt > .timezone {
-  font-size: 0.8em;
+  font-size: 0.9em;
   margin-left: 5px;
 }
 
@@ -103,9 +103,12 @@
   .main-content {
     width: 46%;
   }
+  .main-content .publicatedAt {
+    font-size: 1.175rem;
+  }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 1160px) {
   .main-content {
     width: 30%;
   }

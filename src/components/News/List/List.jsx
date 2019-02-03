@@ -3,19 +3,20 @@ import PropTypes from 'prop-types';
 
 import Button from '../../Button/Button';
 import Spinner from '../../Spinner/Spinner';
-import NewsListArticle from './Article/Article';
+import NewsListCard from './Card/Card';
 
 import convertDate from '../../../utils/convertDate';
+import withLoadingScreen from '../../WithLoading';
 
 const NewsList = ({
-  isLoading,
+  loading,
   setRef,
-  fetchArticles,
-  articles,
+  fetchNews,
+  news,
 }) => (
   <Fragment>
-    {articles.map(article => (
-      <NewsListArticle
+    {news.map(article => (
+      <NewsListCard
         key={article.id}
         id={article.id}
         sectionName={article.sectionName}
@@ -25,10 +26,10 @@ const NewsList = ({
       />
     ))}
     <Button
-      handleClick={fetchArticles}
+      handleClick={fetchNews}
       setRef={setRef}
     >
-      {isLoading
+      {loading
         ? <Spinner />
         : 'Load more'}
     </Button>
@@ -36,28 +37,10 @@ const NewsList = ({
 );
 
 NewsList.propTypes = {
-  isLoading: PropTypes.bool.isRequired,
+  loading: PropTypes.bool.isRequired,
   setRef: PropTypes.func.isRequired,
-  fetchArticles: PropTypes.func.isRequired,
-  articles: PropTypes.arrayOf(
-    PropTypes.shape({
-      id: PropTypes.string,
-      type: PropTypes.string,
-      sectionId: PropTypes.string,
-      sectionName: PropTypes.string,
-      webPublicationDate: PropTypes.string,
-      webTitle: PropTypes.string,
-      webUrl: PropTypes.string,
-      apiUrl: PropTypes.string,
-      fields: PropTypes.shape({
-        thumbnail: PropTypes.string,
-        productionOffice: PropTypes.string,
-      }),
-      isHosted: PropTypes.bool,
-      pillarId: PropTypes.string,
-      pillarName: PropTypes.string,
-    }),
-  ).isRequired,
+  fetchNews: PropTypes.func.isRequired,
+  news: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default NewsList;
+export default withLoadingScreen(NewsList);

@@ -2,14 +2,14 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { MemoryRouter } from 'react-router-dom';
 
-import NewsListArticle from './Article';
+import NewsListCard from './Card';
 
-storiesOf('NewsListArticle component', module)
+storiesOf('NewsListCard component', module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
   .add('with required props', () => (
-    <NewsListArticle
+    <NewsListCard
       id="sport/live/2019/feb/02/ireland-v-england-six-nations-live"
       sectionName="Sport"
       webTitle="Ireland v England: Six Nations 2019 – live!"
@@ -18,7 +18,7 @@ storiesOf('NewsListArticle component', module)
     />
   ))
   .add('with all props', () => (
-    <NewsListArticle
+    <NewsListCard
       id="sport/live/2019/feb/02/ireland-v-england-six-nations-live"
       sectionName="Sport"
       webTitle="Ireland v England: Six Nations 2019 – live!"

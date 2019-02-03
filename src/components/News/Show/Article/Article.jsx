@@ -1,8 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 
 import './Article.css';
 import defaultThumbnail from '../../../../assets/imgs/default.png';
+import withLoadingScreen from '../../../WithLoading';
+import withNotFound from '../../../WithNotFound';
 
 const NewsShowArticle = ({
   webTitle,
@@ -55,4 +58,7 @@ NewsShowArticle.propTypes = {
   thumbnail: PropTypes.string,
 };
 
-export default NewsShowArticle;
+export default compose(
+  withNotFound,
+  withLoadingScreen,
+)(NewsShowArticle);
