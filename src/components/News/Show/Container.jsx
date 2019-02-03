@@ -32,6 +32,10 @@ class NewsShowContainer extends Component {
   }
 }
 
+NewsShowContainer.defaultProps = {
+  error: '',
+};
+
 NewsShowContainer.propTypes = {
   match: PropTypes.shape({
     params: PropTypes.shape({
@@ -40,7 +44,7 @@ NewsShowContainer.propTypes = {
   }).isRequired,
   history: PropTypes.shape({}).isRequired,
   loading: PropTypes.bool.isRequired,
-  error: PropTypes.string.isRequired,
+  error: PropTypes.string,
   article: PropTypes.shape({}).isRequired,
   fetchShowArticle: PropTypes.func.isRequired,
 };

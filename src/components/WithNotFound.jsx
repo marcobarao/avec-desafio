@@ -16,8 +16,12 @@ const withNotFound = (WrappedComponent) => {
     );
   };
 
+  NotFoundInternal.defaultProps = {
+    error: '',
+  };
+
   NotFoundInternal.propTypes = {
-    error: PropTypes.string.isRequired,
+    error: PropTypes.string,
   };
 
   hoistNonReactStatics(NotFoundInternal, WrappedComponent);

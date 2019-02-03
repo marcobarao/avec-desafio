@@ -33,7 +33,7 @@ ScreensRoot.defaultProps = {
 };
 
 ScreensRoot.propTypes = {
-  article: PropTypes.arrayOf(PropTypes.object).isRequired,
+  article: PropTypes.shape({}).isRequired,
   error: PropTypes.string,
 };
 

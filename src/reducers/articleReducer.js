@@ -5,7 +5,7 @@ import {
 } from '../actions/articleActions';
 
 const initialState = {
-  article: [],
+  article: {},
   loading: true,
   error: null,
 };
