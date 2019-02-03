@@ -8,7 +8,16 @@ storiesOf('NewsListArticle component', module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))
-  .add('with props', () => (
+  .add('with required props', () => (
+    <NewsListArticle
+      id="sport/live/2019/feb/02/ireland-v-england-six-nations-live"
+      sectionName="Sport"
+      webTitle="Ireland v England: Six Nations 2019 – live!"
+      webPublicationDate="02/02/2019 11:00:37"
+      productionOffice="UK"
+    />
+  ))
+  .add('with all props', () => (
     <NewsListArticle
       id="sport/live/2019/feb/02/ireland-v-england-six-nations-live"
       sectionName="Sport"
