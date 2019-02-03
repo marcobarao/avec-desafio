@@ -90,7 +90,7 @@
   right: 0;
 }
 
-@media (min-width: 900px) {
+@media (min-width: 1068px) {
   .main-article > .body {
     margin-left: -10%;
   }

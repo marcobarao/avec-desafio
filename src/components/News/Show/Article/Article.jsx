@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { compose } from 'redux';
+import parse from 'html-react-parser';
 
 import './Article.css';
 import defaultThumbnail from '../../../../assets/imgs/default.png';
@@ -21,8 +22,9 @@ const NewsShowArticle = ({
     <h2 className="title">{ webTitle }</h2>
     <h3
       className="subtitle"
-      dangerouslySetInnerHTML={{ __html: trailText }}
-    />
+    >
+      {parse(trailText)}
+    </h3>
     <p className="byline">
       <strong>{`By ${byline}, ${publication} `}</strong>
       {` - ${webPublicationDate}`}
@@ -32,8 +34,9 @@ const NewsShowArticle = ({
     </figure>
     <div
       className="body"
-      dangerouslySetInnerHTML={{ __html: body }}
-    />
+    >
+      {parse(body)}
+    </div>
     <p className="original">
       See on the oficial
       <a href={webUrl}>
