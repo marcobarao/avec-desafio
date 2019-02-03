@@ -7,7 +7,8 @@
 
 .main-header > .title {
   position: absolute;
-  width: 600px;
+  max-width: 600px;
+  width: 100%;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -34,6 +35,7 @@
   background-color: transparent;
   border: none;
   cursor: pointer;
+  z-index: 101;
 }
 .main-header > .action > .icon {
   width: 100%;

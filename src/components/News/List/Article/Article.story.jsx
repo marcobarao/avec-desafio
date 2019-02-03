@@ -4,7 +4,7 @@ import { MemoryRouter } from 'react-router-dom';
 
 import NewsListArticle from './Article';
 
-storiesOf('NewsArticle component', module)
+storiesOf('NewsListArticle component', module)
   .addDecorator(story => (
     <MemoryRouter initialEntries={['/']}>{story()}</MemoryRouter>
   ))

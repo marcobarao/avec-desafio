@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import './Header.css';
 
-const UIHeader = ({
+const Header = ({
   title,
   icon,
   alt,
@@ -23,18 +23,18 @@ const UIHeader = ({
   </header>
 );
 
-UIHeader.defaultProps = {
-  title: 'NewsFeed',
+Header.defaultProps = {
+  title: '',
   icon: null,
   alt: '',
   handleClick: () => {},
 };
 
-UIHeader.propTypes = {
+Header.propTypes = {
   title: PropTypes.string,
-  icon: PropTypes.element,
+  icon: PropTypes.oneOfType([PropTypes.element, PropTypes.string]),
   alt: PropTypes.string,
   handleClick: PropTypes.func,
 };
 
-export default UIHeader;
+export default Header;

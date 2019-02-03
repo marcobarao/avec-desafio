@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import './Article.css';
+import defaultThumbnail from '../../../../assets/imgs/default.png';
 
 const NewsListArticle = ({
   id,
@@ -11,7 +12,7 @@ const NewsListArticle = ({
   webPublicationDate,
   timezone,
   thumbnail,
-  productionOffice,
+  publication,
 }) => (
   <Link
     className="main-content"
@@ -29,7 +30,7 @@ const NewsListArticle = ({
         <time className="publicatedAt">
           { webPublicationDate }
           <small className="timezone">{ timezone }</small>
-          <small className="office">{ productionOffice }</small>
+          <small className="office">{ publication }</small>
         </time>
       </div>
     </article>
@@ -38,6 +39,7 @@ const NewsListArticle = ({
 
 NewsListArticle.defaultProps = {
   timezone: 'UTC-3',
+  thumbnail: defaultThumbnail,
 };
 
 NewsListArticle.propTypes = {
@@ -45,8 +47,8 @@ NewsListArticle.propTypes = {
   sectionName: PropTypes.string.isRequired,
   webTitle: PropTypes.string.isRequired,
   webPublicationDate: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string.isRequired,
-  productionOffice: PropTypes.string.isRequired,
+  thumbnail: PropTypes.string,
+  publication: PropTypes.string.isRequired,
   timezone: PropTypes.string,
 };
 

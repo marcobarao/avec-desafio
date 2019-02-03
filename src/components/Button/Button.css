@@ -1,6 +1,9 @@
 .main-button {
+  position: relative;
   display: block;
   padding: 1.35rem 3rem;
+  min-width: 180px;
+  height: 60px;
   margin: 20px auto;
   border: none;
   background-color: #731db1;

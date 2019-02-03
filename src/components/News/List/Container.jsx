@@ -4,6 +4,7 @@ import Header from '../../Header/Header';
 import NewsList from './List';
 
 import guardian from '../../../services/guardian';
+import Spinner from '../../Spinner/Spinner';
 
 class NewsListContainer extends Component {
   constructor() {
@@ -24,19 +25,6 @@ class NewsListContainer extends Component {
 
   componentDidMount() {
     this.fetchArticles();
-
-    const options = {
-      root: null,
-      rootMargin: '0px',
-      threshold: 0.1,
-    };
-
-    this.observer = new IntersectionObserver(
-      this.handleObserver,
-      options,
-    );
-
-    this.observer.observe(this.moreRef);
   }
 
   componentWillUnmount() {
@@ -44,7 +32,23 @@ class NewsListContainer extends Component {
   }
 
   setRef(moreRef) {
-    this.moreRef = moreRef;
+    if (this.observer) this.observer.disconnect();
+    if (moreRef) {
+      this.moreRef = moreRef;
+
+      const options = {
+        root: null,
+        rootMargin: '150px',
+        threshold: 0.1,
+      };
+
+      this.observer = new IntersectionObserver(
+        this.handleObserver,
+        options,
+      );
+
+      this.observer.observe(this.moreRef);
+    }
   }
 
   handleObserver(entities) {
@@ -65,7 +69,7 @@ class NewsListContainer extends Component {
         page,
         perPage,
       } = this.state;
-      const content = await guardian.get(`search?api-key=${apiKey}&page-size=${perPage}&page=${page}&show-fields=thumbnail,productionOffice`);
+      const content = await guardian.get(`search?api-key=${apiKey}&page-size=${perPage}&page=${page}&show-fields=thumbnail,publication`);
       const { data: { response: { results } } } = content;
       this.setState({
         articles: [...articles, ...results],
@@ -81,13 +85,17 @@ class NewsListContainer extends Component {
     const { isLoading, articles } = this.state;
     return (
       <Fragment>
-        <Header />
-        <NewsList
-          articles={articles}
-          isLoading={isLoading}
-          setRef={this.setRef}
-          fetchArticles={this.fetchArticles}
-        />
+        <Header title="NewsFeed" />
+        {isLoading && !articles.length
+          ? <Spinner color="positive" />
+          : (
+            <NewsList
+              articles={articles}
+              isLoading={isLoading}
+              setRef={this.setRef}
+              fetchArticles={this.fetchArticles}
+            />
+          )}
       </Fragment>
     );
   }
