@@ -8,20 +8,19 @@ const withLoadingScreen = (WrappedComponent) => {
   const LoadingScreen = ({ ...props }) => {
     const { loading, news } = props;
     return (
-      // Se o loading for true e não tiver nenhuma noticia exibe o Spinner
-      // Se não mostra o componente
       loading && !news.length
         ? <Spinner color="positive" />
         : <WrappedComponent {...props} />
     );
   };
 
+  LoadingScreen.defaultProps = {
+    news: [],
+  };
+
   LoadingScreen.propTypes = {
     loading: PropTypes.bool.isRequired,
-    news: PropTypes.oneOfType([
-      PropTypes.object,
-      PropTypes.arrayOf(PropTypes.object),
-    ]).isRequired,
+    news: PropTypes.arrayOf(PropTypes.object),
   };
 
   hoistNonReactStatics(LoadingScreen, WrappedComponent);
