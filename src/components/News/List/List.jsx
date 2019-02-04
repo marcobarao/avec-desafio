@@ -1,12 +1,13 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
+import { compose } from 'redux';
 
 import Button from '../../Button/Button';
 import Spinner from '../../Spinner/Spinner';
 import NewsListCard from './Card/Card';
 
-import convertDate from '../../../utils/convertDate';
-import withLoadingScreen from '../../WithLoading';
+import withLoadingScreen from '../../WithLoadingScreen';
+import withNotFound from '../../WithNotFound';
 
 const NewsList = ({
   loading,
@@ -18,11 +19,7 @@ const NewsList = ({
     {news.map(article => (
       <NewsListCard
         key={article.id}
-        id={article.id}
-        sectionName={article.sectionName}
-        webTitle={article.webTitle}
-        webPublicationDate={convertDate(article.webPublicationDate)}
-        {...article.fields}
+        article={article}
       />
     ))}
     <Button
@@ -43,4 +40,7 @@ NewsList.propTypes = {
   news: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default withLoadingScreen(NewsList);
+export default compose(
+  withLoadingScreen,
+  withNotFound,
+)(NewsList);

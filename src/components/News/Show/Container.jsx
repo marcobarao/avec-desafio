@@ -7,13 +7,10 @@ import { withRouter } from 'react-router-dom';
 import NewsShowArticle from './Article/Article';
 
 import { fetchShowArticle } from '../../../services/guardian';
-import convertDate from '../../../utils/convertDate';
-
 
 class NewsShowContainer extends Component {
   componentDidMount() {
     const { fetchShowArticle: fetch, match: { params: { id } } } = this.props;
-    // Busca a notícia com os dados passado como parametro
     fetch(id, ['trailText', 'thumbnail', 'byline', 'body', 'publication']);
   }
 
@@ -21,11 +18,8 @@ class NewsShowContainer extends Component {
     const { article, loading, error } = this.props;
     return (
       <NewsShowArticle
-        news={article}
+        article={article}
         error={error}
-        {...article}
-        {...article.fields}
-        webPublicationDate={convertDate(article.webPublicationDate)}
         loading={loading}
       />
     );
@@ -51,8 +45,8 @@ NewsShowContainer.propTypes = {
 
 const mapStateToProps = state => ({
   article: state.article.article,
-  loading: state.article.loading,
-  error: state.article.error,
+  loading: state.main.loading,
+  error: state.main.error,
 });
 
 export default compose(

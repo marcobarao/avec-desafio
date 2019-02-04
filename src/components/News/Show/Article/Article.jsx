@@ -5,18 +5,24 @@ import parse from 'html-react-parser';
 
 import './Article.css';
 import defaultThumbnail from '../../../../assets/imgs/default.png';
-import withLoadingScreen from '../../../WithLoading';
+
+import withLoadingScreen from '../../../WithLoadingScreen';
 import withNotFound from '../../../WithNotFound';
+import convertDate from '../../../../utils/convertDate';
 
 const NewsShowArticle = ({
-  webTitle,
-  trailText,
-  thumbnail,
-  byline,
-  body,
-  publication,
-  webPublicationDate,
-  webUrl,
+  article: {
+    webTitle,
+    webPublicationDate,
+    webUrl,
+    fields: {
+      trailText,
+      thumbnail,
+      byline,
+      body,
+      publication,
+    },
+  },
 }) => (
   <article className="main-article">
     <h2 className="title">{ webTitle }</h2>
@@ -27,7 +33,7 @@ const NewsShowArticle = ({
     </h3>
     <p className="byline">
       <strong>{`By ${byline}, ${publication} `}</strong>
-      {` - ${webPublicationDate}`}
+      {` - ${convertDate(webPublicationDate)}`}
     </p>
     <figure className="figure">
       <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
@@ -47,18 +53,26 @@ const NewsShowArticle = ({
 );
 
 NewsShowArticle.defaultProps = {
-  thumbnail: defaultThumbnail,
+  article: {
+    fields: {
+      thumbnail: defaultThumbnail,
+    },
+  },
 };
 
 NewsShowArticle.propTypes = {
-  webTitle: PropTypes.string.isRequired,
-  trailText: PropTypes.string.isRequired,
-  byline: PropTypes.string.isRequired,
-  body: PropTypes.string.isRequired,
-  publication: PropTypes.string.isRequired,
-  webPublicationDate: PropTypes.string.isRequired,
-  webUrl: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string,
+  article: PropTypes.shape({
+    webTitle: PropTypes.string.isRequired,
+    webPublicationDate: PropTypes.string.isRequired,
+    webUrl: PropTypes.string.isRequired,
+    fields: PropTypes.shape({
+      trailText: PropTypes.string.isRequired,
+      byline: PropTypes.string.isRequired,
+      body: PropTypes.string.isRequired,
+      publication: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string,
+    }),
+  }),
 };
 
 export default compose(

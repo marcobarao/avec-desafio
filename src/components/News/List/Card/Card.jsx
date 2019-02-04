@@ -2,17 +2,22 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
+import convertDate from '../../../../utils/convertDate';
+
 import './Card.css';
 import defaultThumbnail from '../../../../assets/imgs/default.png';
 
 const NewsListCard = ({
-  id,
-  sectionName,
-  webTitle,
-  webPublicationDate,
-  timezone,
-  thumbnail,
-  publication,
+  article: {
+    id,
+    webTitle,
+    webPublicationDate,
+    sectionName,
+    fields: {
+      publication,
+      thumbnail,
+    },
+  },
 }) => (
   <Link
     className="main-content"
@@ -28,8 +33,8 @@ const NewsListCard = ({
           <h2 className="title" title={webTitle}>{ webTitle }</h2>
         </div>
         <time className="publicatedAt">
-          { webPublicationDate }
-          <small className="timezone">{ timezone }</small>
+          { convertDate(webPublicationDate) }
+          <small className="timezone">{`UTC${(new Date().getTimezoneOffset()) / -60}`}</small>
           <small className="office">{ publication }</small>
         </time>
       </div>
@@ -38,18 +43,24 @@ const NewsListCard = ({
 );
 
 NewsListCard.defaultProps = {
-  timezone: 'UTC-3',
-  thumbnail: defaultThumbnail,
+  article: {
+    fields: {
+      thumbnail: defaultThumbnail,
+    },
+  },
 };
 
 NewsListCard.propTypes = {
-  id: PropTypes.string.isRequired,
-  sectionName: PropTypes.string.isRequired,
-  webTitle: PropTypes.string.isRequired,
-  webPublicationDate: PropTypes.string.isRequired,
-  thumbnail: PropTypes.string,
-  publication: PropTypes.string.isRequired,
-  timezone: PropTypes.string,
+  article: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    webTitle: PropTypes.string.isRequired,
+    webPublicationDate: PropTypes.string.isRequired,
+    sectionName: PropTypes.string.isRequired,
+    fields: PropTypes.shape({
+      publication: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string,
+    }),
+  }),
 };
 
 export default NewsListCard;

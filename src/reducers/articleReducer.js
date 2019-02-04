@@ -5,9 +5,14 @@ import {
 } from '../actions/articleActions';
 
 const initialState = {
-  article: {},
-  loading: true,
-  error: null,
+  article: {
+    webTitle: '',
+    fields: {
+      trailText: '',
+      body: '',
+      byline: '',
+    },
+  },
 };
 
 const articleReducer = (state = initialState, action) => {
@@ -31,7 +36,14 @@ const articleReducer = (state = initialState, action) => {
         ...state,
         loading: false,
         error: action.payload.error,
-        article: [],
+        article: {
+          webTitle: '',
+          fields: {
+            trailText: '',
+            body: '',
+            byline: '',
+          },
+        },
       };
 
     default:

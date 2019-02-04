@@ -67,11 +67,17 @@ class NewsListContainer extends Component {
   }
 
   render() {
-    const { loading, news, fetchListNews: fetch } = this.props;
+    const {
+      loading,
+      error,
+      news,
+      fetchListNews: fetch,
+    } = this.props;
     return (
       <NewsList
         news={news}
         loading={loading}
+        error={error}
         fetchNews={fetch}
         setRef={this.setRef}
       />
@@ -79,7 +85,12 @@ class NewsListContainer extends Component {
   }
 }
 
+NewsListContainer.defaultProps = {
+  error: '',
+};
+
 NewsListContainer.propTypes = {
+  error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   news: PropTypes.arrayOf(PropTypes.object).isRequired,
   fetchListNews: PropTypes.func.isRequired,
@@ -87,7 +98,8 @@ NewsListContainer.propTypes = {
 
 const mapStateToProps = state => ({
   news: state.news.news,
-  loading: state.news.loading,
+  loading: state.main.loading,
+  error: state.main.error,
 });
 
 
