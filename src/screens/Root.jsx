@@ -16,7 +16,7 @@ const ScreensRoot = ({ article, error }) => (
       <Route
         render={({ history, location: { pathname } }) => (
           <Header
-            title={article.sectionName || error || 'NewsFeed'}
+            title={pathname !== '/' ? article.sectionName || error : 'NewsFeed'}
             icon={pathname !== '/' ? Back : null}
             handleClick={() => history.push('/')}
           />

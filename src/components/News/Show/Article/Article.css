@@ -50,6 +50,11 @@
   margin: 45px auto;
 }
 
+.main-article > .body gu-atom > div {
+  width: 100%;
+  height: 480px;
+}
+
 .main-article > .body .element-video {
   height: 480px;
 }
