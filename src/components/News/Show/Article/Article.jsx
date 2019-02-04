@@ -36,7 +36,7 @@ const NewsShowArticle = ({
       {` - ${convertDate(webPublicationDate)}`}
     </p>
     <figure className="figure">
-      <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
+      <img className="thumbnail" src={thumbnail || defaultThumbnail} alt="Thumbnail" />
     </figure>
     <div
       className="body"

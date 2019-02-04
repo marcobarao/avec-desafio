@@ -25,7 +25,7 @@ const NewsListCard = ({
   >
     <article className="article">
       <figure className="figure">
-        <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
+        <img className="thumbnail" src={thumbnail || defaultThumbnail} alt="Thumbnail" />
       </figure>
       <div className="content">
         <p className="section">{ sectionName }</p>
