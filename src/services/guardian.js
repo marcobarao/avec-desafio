@@ -19,8 +19,6 @@ const guardian = axios.create({
 const fetchListNews = (page, fields) => (
   async (dispatch) => {
     dispatch(fetchNewsBegin());
-    // Tenta trazer todas as notícias, caso dê algum status code diferente de 200 dá FAIL
-    // Caso dê certo seta o resultado
     try {
       const response = await guardian.get(`search?api-key=${API_KEY}&page-size=48&page=${page}&show-fields=${fields}`);
       dispatch(fetchNewsSuccess(response.data.response.results));
@@ -33,8 +31,6 @@ const fetchListNews = (page, fields) => (
 const fetchShowArticle = (id, fields) => (
   async (dispatch) => {
     dispatch(fetchArticleBegin());
-    // Tenta trazer todas as notícias, caso dê algum status code diferente de 200 dá FAIL
-    // Caso dê certo seta o resultado
     try {
       const response = await guardian.get(`${id}?api-key=${API_KEY}&show-fields=${fields}`);
       dispatch(fetchArticleSuccess(response.data.response.content));
