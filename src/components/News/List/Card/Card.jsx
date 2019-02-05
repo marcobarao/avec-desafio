@@ -15,7 +15,7 @@ const NewsListCard = ({
     sectionName,
     fields: {
       publication,
-      thumbnail,
+      thumbnail = defaultThumbnail,
     },
   },
   setOffsetY,
@@ -27,7 +27,7 @@ const NewsListCard = ({
   >
     <article className="article">
       <figure className="figure">
-        <img className="thumbnail" src={thumbnail || defaultThumbnail} alt="Thumbnail" />
+        <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
       </figure>
       <div className="content">
         <p className="section">{ sectionName }</p>

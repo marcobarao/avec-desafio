@@ -7,10 +7,13 @@ import {
 const initialState = {
   article: {
     webTitle: '',
+    webPublicationDate: new Date(),
+    webUrl: '',
     fields: {
       trailText: '',
       body: '',
       byline: '',
+      publication: '',
     },
   },
 };
