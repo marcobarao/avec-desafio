@@ -18,10 +18,12 @@ const NewsListCard = ({
       thumbnail,
     },
   },
+  setOffsetY,
 }) => (
   <Link
     className="main-content"
-    to={id}
+    onClick={() => setOffsetY(window.pageYOffset)}
+    to={{ pathname: id }}
   >
     <article className="article">
       <figure className="figure">
@@ -61,6 +63,7 @@ NewsListCard.propTypes = {
       thumbnail: PropTypes.string,
     }),
   }),
+  setOffsetY: PropTypes.func.isRequired,
 };
 
 export default NewsListCard;

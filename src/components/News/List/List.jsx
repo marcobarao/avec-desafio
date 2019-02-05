@@ -14,12 +14,14 @@ const NewsList = ({
   setRef,
   fetchNews,
   news,
+  setOffsetY,
 }) => (
   <Fragment>
     {news.map(article => (
       <NewsListCard
         key={article.id}
         article={article}
+        setOffsetY={setOffsetY}
       />
     ))}
     <Button
@@ -38,6 +40,7 @@ NewsList.propTypes = {
   setRef: PropTypes.func.isRequired,
   fetchNews: PropTypes.func.isRequired,
   news: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setOffsetY: PropTypes.func.isRequired,
 };
 
 export default compose(
