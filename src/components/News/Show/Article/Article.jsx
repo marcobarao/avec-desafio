@@ -17,7 +17,7 @@ const NewsShowArticle = ({
     webUrl,
     fields: {
       trailText,
-      thumbnail,
+      thumbnail = defaultThumbnail,
       byline,
       body,
       publication,
@@ -36,7 +36,7 @@ const NewsShowArticle = ({
       {` - ${convertDate(webPublicationDate)}`}
     </p>
     <figure className="figure">
-      <img className="thumbnail" src={thumbnail || defaultThumbnail} alt="Thumbnail" />
+      <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
     </figure>
     <div
       className="body"
@@ -52,27 +52,22 @@ const NewsShowArticle = ({
   </article>
 );
 
-NewsShowArticle.defaultProps = {
-  article: {
-    fields: {
-      thumbnail: defaultThumbnail,
-    },
-  },
-};
-
 NewsShowArticle.propTypes = {
   article: PropTypes.shape({
     webTitle: PropTypes.string.isRequired,
-    webPublicationDate: PropTypes.string.isRequired,
+    webPublicationDate: PropTypes.oneOfType([
+      PropTypes.string,
+      PropTypes.instanceOf(Date),
+    ]).isRequired,
     webUrl: PropTypes.string.isRequired,
     fields: PropTypes.shape({
       trailText: PropTypes.string.isRequired,
+      thumbnail: PropTypes.string,
       byline: PropTypes.string.isRequired,
       body: PropTypes.string.isRequired,
       publication: PropTypes.string.isRequired,
-      thumbnail: PropTypes.string,
-    }),
-  }),
+    }).isRequired,
+  }).isRequired,
 };
 
 export default compose(

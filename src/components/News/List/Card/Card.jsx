@@ -15,17 +15,19 @@ const NewsListCard = ({
     sectionName,
     fields: {
       publication,
-      thumbnail,
+      thumbnail = defaultThumbnail,
     },
   },
+  setOffsetY,
 }) => (
   <Link
     className="main-content"
-    to={id}
+    onClick={() => setOffsetY(window.pageYOffset)}
+    to={{ pathname: id }}
   >
     <article className="article">
       <figure className="figure">
-        <img className="thumbnail" src={thumbnail || defaultThumbnail} alt="Thumbnail" />
+        <img className="thumbnail" src={thumbnail} alt="Thumbnail" />
       </figure>
       <div className="content">
         <p className="section">{ sectionName }</p>
@@ -61,6 +63,7 @@ NewsListCard.propTypes = {
       thumbnail: PropTypes.string,
     }),
   }),
+  setOffsetY: PropTypes.func.isRequired,
 };
 
 export default NewsListCard;

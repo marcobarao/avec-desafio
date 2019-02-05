@@ -50,6 +50,6 @@ const mapStateToProps = state => ({
 });
 
 export default compose(
-  connect(mapStateToProps, { fetchShowArticle }),
   withRouter,
+  connect(mapStateToProps, { fetchShowArticle }),
 )(NewsShowContainer);

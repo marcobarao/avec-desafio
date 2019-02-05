@@ -4,13 +4,13 @@ import { connect } from 'react-redux';
 
 import NewsList from './List';
 
+import { setNewOffsetY } from '../../../actions/mainActions';
 import { fetchListNews } from '../../../services/guardian';
 
 class NewsListContainer extends Component {
   constructor() {
     super();
     this.state = {
-      page: 1,
       scrollY: 0,
     };
 
@@ -19,8 +19,17 @@ class NewsListContainer extends Component {
   }
 
   componentDidMount() {
-    const { page } = this.state;
-    const { news, fetchListNews: fetch } = this.props;
+    const {
+      news,
+      page,
+      fetchListNews: fetch,
+      offsetY,
+    } = this.props;
+
+    this.setState({ scrollY: offsetY });
+
+    window.scrollTo(0, offsetY);
+
 
     if (!news.length) fetch(page, ['thumbnail', 'publication']);
   }
@@ -51,16 +60,13 @@ class NewsListContainer extends Component {
   }
 
   handleObserver(entities) {
-    const { scrollY, page } = this.state;
-    const { fetchListNews: fetch } = this.props;
+    const { scrollY } = this.state;
+    const { fetchListNews: fetch, page } = this.props;
     // Pega a posição atual do scroll no eixo Y
     const { boundingClientRect: { y } } = entities[0];
 
     if (scrollY > y) {
-      this.setState(
-        { page: page + 1 },
-        () => fetch(page + 1, ['thumbnail', 'publication']),
-      );
+      fetch(page, ['thumbnail', 'publication']);
     }
 
     this.setState({ scrollY: y });
@@ -72,6 +78,7 @@ class NewsListContainer extends Component {
       error,
       news,
       fetchListNews: fetch,
+      setNewOffsetY: setOffsetY,
     } = this.props;
     return (
       <NewsList
@@ -80,6 +87,7 @@ class NewsListContainer extends Component {
         error={error}
         fetchNews={fetch}
         setRef={this.setRef}
+        setOffsetY={setOffsetY}
       />
     );
   }
@@ -93,14 +101,19 @@ NewsListContainer.propTypes = {
   error: PropTypes.string,
   loading: PropTypes.bool.isRequired,
   news: PropTypes.arrayOf(PropTypes.object).isRequired,
+  page: PropTypes.number.isRequired,
   fetchListNews: PropTypes.func.isRequired,
+  setNewOffsetY: PropTypes.func.isRequired,
+  offsetY: PropTypes.number.isRequired,
 };
 
 const mapStateToProps = state => ({
   news: state.news.news,
+  page: state.news.page,
   loading: state.main.loading,
   error: state.main.error,
+  offsetY: state.main.offsetY,
 });
 
 
-export default connect(mapStateToProps, { fetchListNews })(NewsListContainer);
+export default connect(mapStateToProps, { fetchListNews, setNewOffsetY })(NewsListContainer);

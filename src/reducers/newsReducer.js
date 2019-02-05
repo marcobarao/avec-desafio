@@ -6,6 +6,7 @@ import {
 
 const initialState = {
   news: [],
+  page: 1,
 };
 
 const newsReducer = (state = initialState, action) => {
@@ -13,23 +14,19 @@ const newsReducer = (state = initialState, action) => {
     case FETCH_NEWS_BEGIN:
       return {
         ...state,
-        loading: true,
-        error: null,
       };
 
     case FETCH_NEWS_SUCCESS:
       return {
         ...state,
-        loading: false,
         news: [...state.news, ...action.payload.news],
+        page: state.page + 1,
       };
 
     case FETCH_NEWS_FAILURE:
       return {
         ...state,
-        loading: false,
         error: action.payload.error,
-        news: [],
       };
 
     default:
