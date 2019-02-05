@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import convertDate from '../../../../utils/convertDate';
+import getTimeZone from '../../../../utils/getTimeZone';
 
 import './Card.css';
 import defaultThumbnail from '../../../../assets/imgs/default.png';
@@ -36,7 +37,7 @@ const NewsListCard = ({
         </div>
         <time className="publicatedAt">
           { convertDate(webPublicationDate) }
-          <small className="timezone">{`UTC${(new Date().getTimezoneOffset()) / -60}`}</small>
+          <small className="timezone">{getTimeZone()}</small>
           <small className="office">{ publication }</small>
         </time>
       </div>

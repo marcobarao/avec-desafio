@@ -1,5 +1,5 @@
 import { expect } from 'chai';
-import convertDate from './convertDate';
+import convertDate from './index';
 
 it('convertDate should be a function', () => {
   expect(convertDate).to.be.a('function');
